@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js/function.html</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <td><input type="text" id="name" value="홍길동"></td>
+        </tr>
+        <tr>
+            <th>나이</th>
+            <td><input type="number" id="age" value="20"></td>
+        </tr>
+        <tr>
+            <th>키</th>
+            <td><input type="text" id="height" value="175.7"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="saveBtn">저장</button>
+                <!-- 위에거 button#saveBtn{저장}이라고 치기 -->
+
+
+            </td>
+        </tr>
+    </table>
+
+
+    <div id="show">
+		
+        <table border ='1'>
+			
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>키</th>
+                    <th>소개</th>
+                </tr>
+            </thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+     <script src="member.js"></script>
+     <script src="function5.js"></script>
+    <script src="function4.js"></script> // function.js에 컨트롤 클릭해서 코드를 외부로 빼기
+</body>
+
+</html>

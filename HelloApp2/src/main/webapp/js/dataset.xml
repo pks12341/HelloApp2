@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<record>
+		<id>1</id>
+		<first_name>Caria</first_name>
+		<email>ccurm0@yolasite.com</email>
+	</record>
+	<record>
+		<id>2</id>
+		<first_name>Mandie</first_name>
+		<email>moxx1@usatoday.com</email>
+	</record>
+	<record>
+		<id>3</id>
+		<first_name>Rafferty</first_name>
+		<email>rpetrov2@slashdot.org</email>
+	</record>
+	<record>
+		<id>4</id>
+		<first_name>Fitz</first_name>
+		<email>ffermin3@google.cn</email>
+	</record>
+	<record>
+		<id>5</id>
+		<first_name>Gal</first_name>
+		<email>gmacdiarmid4@illinois.edu</email>
+	</record>
+</dataset>

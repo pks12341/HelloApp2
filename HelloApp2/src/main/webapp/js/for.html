@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js/for.html</title>
+    <script>
+        console.log('javascript start...');
+        //5번 반복..
+        for (let i = 0; i < 5; i++) {
+            console.log(i);
+
+        }
+
+        //배열과 for 활용..
+        let numary = [1, 2, 3, 4, 5]; //배열 객체
+        let sum = 0;
+
+        console.log(typeof numary);
+        //var 변수 : 전역 or 지역(함수안에서 선언)
+        //아래처럼 var로 선언하면 중괄호 벗어나도 사용가능(console.log(i)에 5출력)
+        //         for(var i = 0; i<numary.length; i++){ //let, const : 블럭단위의 변수지정이 된다.
+
+
+        // }
+        //         console.log(i)
+        for (let i = 0; i < numary.length; i++) { //let, const : 블럭단위의 변수지정이 된다.
+            sum += numary[i];
+
+        }
+        console.log('sum값 : ' + sum);
+        //확장 for..of.. 사용법 //간편하지만 인덱스값을 못쓴다
+        sum = 0; //0으로초기화
+        for (let val of numary) {
+
+            sum += val;
+
+        }
+        console.log(`sum의 값 : ${sum}`); // `를 쓰면+연산자를 쓸필요 없다
+
+
+        sum = 0;
+        //배열.forEach(함수)
+        numary.forEach(function (item, idx, ary) {
+
+
+            // if (item % 2 == 0)  //짝수만
+            if (idx <= 2) //1,2,3 번째 값만
+                sum += item;
+
+
+
+        })
+
+        console.log(`sum의값 : ${sum}`);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js/for2.html</title>
+</head>
+
+<body>
+    <script>
+        const studenAry = [
+            {sno : 1, sname : '홍길동', score : 80},
+            {sno : 2, sname : '박민서', score : 88},
+            {sno : 3, sname : '최창식', score : 92}
+
+        ]
+        let sum =avg =0;
+        studenAry.forEach(function(item,idx,ary){ //ary는 잘 안쓴다
+        //    console.log(item);
+             console.log(`이름 : ${item.sname}`); //이름만
+            sum += item.score
+            if(idx == ary.length -1){
+              avg = sum/ary.length;
+              avg = avg.toFixed(2); //소수 2자리까지 출력
+            }
+        })
+        // avg = sum/studenAry.length
+        console.log(`점수의 합 : ${sum}이고, 평균: ${avg}이다`)
+
+    </script>
+</body>
+
+</html>
