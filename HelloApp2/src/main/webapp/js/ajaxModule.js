@@ -14,12 +14,9 @@ const table = {
 	makeBody(dataAry = [{ mid, pass, name, phone }]) {
 		let bodyTag = "<tbody id ='list'>";
 		dataAry.forEach(item => {
-			bodyTag += "<tr>";
-			for (let prop in item) {
-				bodyTag += "<td>" + item[prop] + "</td>";
-			}
-			bodyTag += "</tr>";
 
+		bodyTag += this.makeTr(item);
+		
 		})
 		bodyTag += "</tbody>"
 		return bodyTag;
@@ -31,11 +28,12 @@ const table = {
 		tableTag += "</table>";
 		return tableTag;
 	},
+
 	makeTr(data = { mid, pass, name, phone }) {
-		let tr = '<tr>'
+		let tr = "<tr onclick = 'showInfo(event,this)'>" //this는 tr을 가리킴 //tr클릭하면 값들을 보여주기
 		for (let prop in data) {
 			tr += "<td>" + data[prop] + "</td>";
-		}	
+		}
 		tr += '</tr>'
 		return tr;
 	}

@@ -15,7 +15,7 @@ import org.yedam.service.MemberVO;
 import org.yedam.serviceImpl.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberListServ
+ * Servlet implementation class MemberListServlet
  */
 @WebServlet("/MemberListServ2")
 public class MemberListServ2 extends HttpServlet {
@@ -33,32 +33,32 @@ public class MemberListServ2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
-		MemberService svc = new MemberServiceImpl();
+		MemberService svc =new MemberServiceImpl();
 		List<MemberVO> list = svc.memberList();
 		System.out.println("Json데이터 입니다..");
 		
-		response.setContentType("text/json;charset=utf-8");
+		response.setContentType("text/Json;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
-		//[{"mid":value,"pass":value,"name":value,"phone":value},{},{}] //json포맷
+		//[{"mid" : value,"pass": value, "name":value,"phone":value}]
 		String str = "[";
 		int cnt = 0;
-		for(MemberVO vo : list) {  //위 json포맷규칙대로 작성
+		for(MemberVO vo : list) {
 			str += "{";
-			str += "\"mid\":\""+vo.getMid()+"\",";  //\"실제 따옴표
-			str += "\"pass\":\""+vo.getPass()+"\","; 
-			str += "\"name\":\""+vo.getName()+"\","; 
-			str += "\"phone\":\""+vo.getPhone()+"\""; 
-			str += "}";	
+			str += "\"mid\":\"" + vo.getMid() + "\",";
+			str += "\"pass\":\"" + vo.getPass() + "\",";
+			str += "\"name\":\"" + vo.getName() + "\",";
+			str += "\"phone\":\"" + vo.getPhone() + "\"";
+			str += "}";
 			if(++cnt != list.size()) {
-				str +=",";
+				str += ",";
 			}
 		}
-		str +="]";
+		str += "]";
 		out.print(str);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

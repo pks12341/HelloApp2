@@ -1,92 +1,139 @@
-//ajax1.js
-//Asynchronus Javascript And XML 의 약자
-//비동기와 동기
+// ajax1.js
+// Asynchronous Javascript And XML:
+//비동기 vs. 동기
+//동기 방식 순차적으로 처리 a > b > c > d 이런식
 import { table } from './ajaxModule.js';
 
-
-
 let friends = [];
+//동기 방식
+friends.push('홍길동');
+friends.push('김길동');
+friends.push('최길동');
+console.log(friends);
+
+//비동기 : 작업이 끝나는 순으로 처리 효율적인 방식이다
 setTimeout(function() {
-	friends.push('홍길동')
-}, 1000) //함수를 실행하는데 1000ms후 실행하라는뜻
+	friends.push('홍길동');
+}, 1000); // 1000ms 
 
 setTimeout(function() {
-	friends.push('김길동')
-}, 500)
+	friends.push('김길동');
+}, 500); // 500ms
 
 setTimeout(function() {
-	friends.push('최길동')
-}, 2000)
+	friends.push('최길동');
+}, 2000); // 2000ms
+console.log(friends);
 
-console.log(friends)
-//비동기방식 = 먼저 끝나는것부터(병렬적)
-//만약 웹페이지가 동기방식이라면? 시간이 너무오래걸린다
+// XML
+//http://localhost:8080/helloWeb/js/ajax.html
+//http://localhost:8080/helloWeb/MemberListServlet
+
+// DB 
+// CREATE TABLE MEMBER2 (
+//     mid     varchar2(10)    PRIMARY KEY,
+//     pass    varchar2(10)    NOT NULL,
+//     name    varchar2(30)    NOT NULL,
+//     phone   varchar2(13)    DEFAULT '010-1111-2222'
+// );
+// INSERT INTO MEMBER2
+// VALUES('M001', '1111', '홍길동', '010-1234-5678');
+// INSERT INTO MEMBER2
+// VALUES('M002', '2222', '김길동', '010-4567-8763');
+// INSERT INTO MEMBER2
+// VALUES('M003', '3333', '최길동', '010-3210-7890');
+// COMMIT;
+// SELECT * FROM MEMBER2;
+
+//보류
+let newMember =// XML 꺼얌 
+	{ mid: "M009", pass: "9999", name: "민식이", phone: "010-9999-9999" };
+// newMember 값을 활용해서 tbody="list" 추가.
+
+let xhtp = new XMLHttpRequest();
+
+// XML 실행
+//xhtp.open('get', '../MemberListServ');
+//xhtp.send();
+//xhtp.onload = loadXML; 
 
 
-//friends.push('홍길동')
-//friends.push('김길동')
-//friends.push('최길동')
-//console.log(friends)
-//동기방식 - 코드 실행순서대로담김
 
-
-
-
-
-// 보류..
-let newMember = 
-{mid:"M009",pass : "9999",name: "민식이", phone: "010-9999-9999"}
-//newMember 값을 활용해서 tbody = "list" 추가.
-
-
-let xhtp = new XMLHttpRequest()
+//JSON 실행
 xhtp.open('get', '../MemberListServ2');
 xhtp.send();
-xhtp.onload = loadJson;//loadJson혹은 loadXML 연결할수 있다 //()가 없다.. 온로드 됐을때 실행하라는의미에서?
+xhtp.onload = loadJson;
 
-function loadJson(){
-	console.log(xhtp.responseText)
-	let result = JSON.parse(xhtp.responseText)//json문자열=>오브젝트타입
-	console.log(result);
+function loadJson() {
+	console.log(xhtp.responseText);
 	
+	let result1 = JSON.parse(xhtp.responseText); //Json 문자열 -> 오브
+	
+	console.log(result1);
+	
+	let titles = ["회원번호", "비밀번호", "이름", "연락처"];
+	
+	let dataAry = [];
+	
+	result1.forEach(member =>{
+		dataAry.push({mid:member.mid, pass: member.pass, name: member.name, phone:member.phone})
+	})
+
+	result1 = table.makeTable(titles, dataAry);
+
+	document.getElementById('show').innerHTML += result1;
 }
 
+
 function loadXML() {
-	//console.log(xhtp.responseXML);
+	console.log(xhtp.responseXML);
+	
 	let doc = xhtp.responseXML;
-	let records = doc.getElementsByTagName('record')
+	
+	let records = doc.getElementsByTagName('record');
+	
 	console.log(records);
 
-
+	//   console.log(records[0].children[0].innerHTML);
 	let titles = ["회원번호", "비밀번호", "이름", "연락처"];
 	let dataAry = [];
 	for (let record of records) {
 		let obj = {
-			mid: record.children[0].textContent, //mid.
-			pass: record.children[1].textContent, //pass.
-			name: record.children[2].textContent, //name.
-			phone: record.children[3].textContent //phone.
+			mid: record.children[0].textContent,  //mid
+			pass: record.children[1].textContent, //pass
+			name: record.children[2].textContent, //name
+			phone: record.children[3].textContent //phone
 		}
 		dataAry.push(obj);
-		
-	
 	}
-
 	let result = table.makeTable(titles, dataAry);
-		console.log(result);
-	document.getElementById('show').innerHTML =result;
 	
-	
-	//교수님방식 ajax실행이되고나서 추가하는 기능이 실행
-	//let tr = '<tr><td>'+newMember.mid+
-	//'</td><td>'+newMember.pass+
-	//'</td><td>'+newMember.name+
-	//'</td><td>'+newMember.phone+'</td></tr>'
-	//document.getElementById('list').innerHTML +=tr
-	
-	let tr = table.makeTr(newMember);
-	document.getElementById('list').innerHTML += tr
-	
-}
+	console.log(result);
 
+	let bbo = table.makeTr(newMember);
+
+	document.getElementById('show').innerHTML += result;
+	document.getElementById('list').innerHTML += bbo;
+} // end of onload.
+
+
+// filter 와 find 의 차이는 filter 는  조건에 시작하는 배열 전체를 가져오지만 find는 String 타입으로 하나만 가져옴
+// some은 true , false 로 값을 반환하는 타입 한명이라도 조건에 맞으면 true 그와 반대로 every 는 모두가 조건에 맞아야 true , false 로 값을 반환한다
+// findIndex 는 그냥 index 번호를 값을 반환
+/*let ceoList = [
+	{name:"Larry Page" , age:23 , ceo:true},
+	{name:"Kang Jin", age:28 , ceo:false},
+	{name:"Lee Ju" , age:32 , ceo:true}
+	
+]
+
+let data1 = ceoList.filter((obj) => { //조건
+	return obj.age == 23
+})
+console.log(data1);
+
+let data = ceoList.map((obj) => {
+	return obj;  //이름만 띄우고 싶을떄는 obj.name 
+})
+console.log(data)*/
 

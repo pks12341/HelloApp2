@@ -10,21 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yedam.service.MemberService;
-import org.yedam.service.MemberVO;
-import org.yedam.serviceImpl.MemberServiceImpl;
+import org.yedam.service.BookService;
+import org.yedam.service.BookVO;
+import org.yedam.serviceImpl.BookServiceImpl;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Servlet implementation class MemberListServlet
  */
-@WebServlet("/MemberListServ")
-public class MemberListServ extends HttpServlet {
+@WebServlet("/BookListServ")
+public class BookListServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServ() {
+    public BookListServ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,26 +38,18 @@ public class MemberListServ extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		MemberService svc =new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList();
+		BookService svc =new BookServiceImpl();
+		List<BookVO> list = svc.bookList();
 		System.out.println(list);
 		
-		response.setContentType("text/xml;charset=utf-8");
+		response.setContentType("text/json;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
-		String str ="<dataset>";
+		Gson gson = new GsonBuilder().create();
 		
-		for(MemberVO vo : list) {
-			str += "<record>";
-			str += "<mid>" + vo.getMid() + "</mid>";
-			str += "<pass>" + vo.getPass() + "</pass>";
-			str += "<name>" + vo.getName() + "</name>";
-			str += "<phone>" + vo.getPhone() + "</phone>";
-			str += "</record>";
+		String Json=gson.toJson(list);
 			
-		}
-		str += "</dataset>";
-		out.print(str);
+		out.print(Json);
 	}
 
 	/**

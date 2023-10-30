@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberVO {
-	private String mid;
-	private String pass;
-	private String name;
-	private String phone;
+public class BookVO {
+	private String book_code;
+	private String book_title;
+	private String book_author;
+	private String book_press;
+	private String book_price;
 }
