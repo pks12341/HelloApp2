@@ -17,10 +17,28 @@
 		<li>수박</li>
 		<li>감자</li>
 	</ul>
-	<p>깃 추가 작업을 함</p>
-	<p> a의 상태로 변경.</p>
+	<p class = "first">깃 추가 작업을 함</p>
+	<p id = "second"> a의 상태로 변경.</p>
 	<p>b의 상태변경.</p>
-	<p>연습</p>
+
+	<script>
+		let body = document.querySelector('body');
+		//console.log(body.children[5].children[2].innerHTML = "메론"); //수박을 메론으로 바꿈
+		//console.log(body.parentElement.innerHTML = "");
+		//li의 다섯번째 포도 생성
+		let li5 = document.createElement('li');
+		li5.innerHTML = '포도';
+		console.log(li5)
+		document.querySelector('ul').appendChild(li5); //부모의 자식요소로 넣기
+		
+		
+		let p4 = document.createElement('p');
+		p4.setAttribute('class', 'fourth')
+		p4.innerHTML = 'c의 상태변경';
+		document.querySelector('p:nth-of-type(3)').after(p4); //3번 뒤에 넣기
+		
+	</script>
+
 </body>
 
 </html>

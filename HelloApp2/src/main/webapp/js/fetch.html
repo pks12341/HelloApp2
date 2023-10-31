@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>js/fetch.html</title>
+	<script type = "module" src = "fetch1.js"></script>
+</head>
+
+<body>
+	<div id = "show"></div>
+	<script>
+		//promise 객체.(fulfilled(정상),pending(처리중),rejected(처리 제대로 안됨) 3가지 상태..)
+		const promise = new Promise(function (resolve) {
+			setTimeout(function () {
+				console.log('실행.')
+				resolve('Success');
+			}, 500);
+		});
+		//resolve = promise가 정상처리되면 successs를 then으로전달
+		promise
+			.then((resolve) => {
+				console.log('then : ', resolve) //success출력
+				return 'OK'; //promise반환
+			})
+			.then((result)=>{
+				console.log('2then : ',result);//OK출력
+			
+			})
+			//에러시 실행
+			.catch((err)=>{
+				console.log('err : ',err)
+			})
+
+	</script>
+</body>
+
+</html>
