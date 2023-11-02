@@ -3,9 +3,8 @@
 import table from './domTable.js';
 
 
-
 let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=lfJ2znLyQ%2Btfj%2BmzgN0B6X94H%2BHcV9N9jTbagP9k1k9GS%2F7KDcNRcRcmdN%2B08IRwqdhFKgwuow7Pc%2BKGaZ%2B5lg%3D%3D'
-let titles = ['센터id', '센터명', '의료원', '연락처','주소'];
+let titles = ['센터id', '센터명', '의료원', '연락처', '주소'];
 
 fetch(url)
 	//function(resolve){return resolve.json()}를 줄인ㄷ것
@@ -87,9 +86,9 @@ function genTable(rawData = [], page = 1) {
 		})
 		document.querySelector('.pagination').append(aTag);
 	}
-	
 
-	
+
+
 	//전체페이지
 	for (let i = beginPage; i <= endPage; i++) {
 		let aTag = document.createElement('a');
@@ -106,17 +105,17 @@ function genTable(rawData = [], page = 1) {
 	}
 
 	//다음페이지
-	
+
 	if (nextPage) {
 		let aTag = document.createElement('a');
 		aTag.setAttribute('href', '#');
 		aTag.innerHTML = '&raquo;'
 		aTag.addEventListener('click', function(e) {  //클릭발생시 함수실행
-			genTable(rawData, beginPage + 10); 
+			genTable(rawData, beginPage + 10);
 		})
 		document.querySelector('.pagination').append(aTag);
 	}
-	
+
 	//	result = members.reduce((acc, item, idx) => {
 	//		if (item.id > 1 && idx < 3) {
 	//			acc.push(item);
@@ -142,7 +141,7 @@ function genTable(rawData = [], page = 1) {
 				centerName: center.centerName.replace('코로나19 ', ''),
 				org: center.org,
 				phoneNumber: center.phoneNumber,
-				address : center.address,
+				address: center.address,
 				lat: center.lat,
 				lng: center.lng
 			}
@@ -169,9 +168,7 @@ function genTable(rawData = [], page = 1) {
 			//location.href = 'daumapi.html?x='+lat+'&y='+lng;
 			window.open('daumapi.html?x=' + lat + '&y=' + lng);//새탭에 열기
 		})
-
 	})
-
 }
 
 
