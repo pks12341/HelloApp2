@@ -66,17 +66,17 @@ xhtp.onload = loadJson;
 
 function loadJson() {
 	console.log(xhtp.responseText);
-	
+
 	let result1 = JSON.parse(xhtp.responseText); //Json 문자열 -> 오브
-	
+
 	console.log(result1);
-	
+
 	let titles = ["회원번호", "비밀번호", "이름", "연락처"];
-	
+
 	let dataAry = [];
-	
-	result1.forEach(member =>{
-		dataAry.push({mid:member.mid, pass: member.pass, name: member.name, phone:member.phone})
+
+	result1.forEach(member => {
+		dataAry.push({ mid: member.mid, pass: member.pass, name: member.name, phone: member.phone })
 	})
 
 	result1 = table.makeTable(titles, dataAry);
@@ -87,11 +87,11 @@ function loadJson() {
 
 function loadXML() {
 	console.log(xhtp.responseXML);
-	
+
 	let doc = xhtp.responseXML;
-	
+
 	let records = doc.getElementsByTagName('record');
-	
+
 	console.log(records);
 
 	//   console.log(records[0].children[0].innerHTML);
@@ -107,7 +107,7 @@ function loadXML() {
 		dataAry.push(obj);
 	}
 	let result = table.makeTable(titles, dataAry);
-	
+
 	console.log(result);
 
 	let bbo = table.makeTr(newMember);
